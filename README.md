@@ -5,7 +5,7 @@
   2. python packges: selenium 
 
 ## install requirement:
-- install with `pip install -r req.txt'` or `pip3 install -r req.txt` 
+- install with `pip install -r requirement.txt'` or `pip3 install -r requirement.txt` 
 
 ## usage:
 1. 
