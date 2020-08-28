@@ -97,7 +97,7 @@ in this system you can easily define image ratio and which size if ratio with so
 | PATH_OF_THIS_FILE | String -> path  | image_scraper.py file path  | as is in default |
 | IMAGE_BASE_DIR | String -> path  | where image save  | as is in default |
 | GOOGLE_DRIVER_PATH | Int -> second  | If need to stop for download every image then put greater than 1  | 10 (seconds) |
-| GOOGLE_CHROM_DRIVER_PATH |String -> path  | Path of google chrom driver | as is in default  |
+| GOOGLE_CHROME_DRIVER_PATH |String -> path  | Path of google chrome driver | as is in default  |
 | IMAGE_RATIO_PERSENT | Float  | convert ratio to float number  | 1.7 as mohammd ali picture |
 | MAKE_GRAY | Boolean  | If CHECK_RATIO_AND_RESIZE true then make images gray | False |
 | MINIMUM_ELEMENT_ERROR | Float  | if you need 100 image then at least check exist of 120 image this var is gap between 100 to 120. also when check CHECK_RATIO_AND_RESIZE need up to 2 time more elemnt to check and download needed image with custom ratio   | 0.2 |

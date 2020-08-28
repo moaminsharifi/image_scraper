@@ -77,7 +77,7 @@ class Scraper_Config:
         self.NUMBER_OF_PICTURES =  max(5, NUMBER_OF_PICTURES)
         self.PATH_OF_THIS_FILE = os.path.abspath(os.getcwd())
         self.IMAGE_BASE_DIR = f'{self.PATH_OF_THIS_FILE}/images/{SEARCH_QUERY.replace(" ", "-")}'
-        self.GOOGLE_CHROM_DRIVER_PATH = '/usr/bin/chromedriver'
+        self.GOOGLE_CHROME_DRIVER_PATH = '/usr/bin/chromedriver'
 
         # Image Resize and Ratio Setup
         self.CHECK_RATIO_AND_RESIZE = CHECK_RATIO_AND_RESIZE
