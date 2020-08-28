@@ -69,8 +69,6 @@ scraper = Image_Scraper(config)
 scraper.scrap(verbose=True)
 ```
 
-# TODO:
-- add more example here for custom config
 
 ---
 # Defindes
