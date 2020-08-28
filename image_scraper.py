@@ -4,18 +4,7 @@ Search Engines Image Scraper
 Licensed under the MIT License (see LICENSE for details)
 Written by Amin Sharifi bigmpc@github.com
 ------------------------------------------------------------
-Usage: import the module (see Jupyter notebooks for examples), or run from
-       the command line as such:
-    # Train a new model starting from pre-trained COCO weights
-    python3 coco.py train --dataset=/path/to/coco/ --model=coco
-    # Train a new model starting from ImageNet weights. Also auto download COCO dataset
-    python3 coco.py train --dataset=/path/to/coco/ --model=imagenet --download=True
-    # Continue training a model that you had trained earlier
-    python3 coco.py train --dataset=/path/to/coco/ --model=/path/to/weights.h5
-    # Continue training the last model you trained
-    python3 coco.py train --dataset=/path/to/coco/ --model=last
-    # Run COCO evaluatoin on the last model you trained
-    python3 coco.py evaluate --dataset=/path/to/coco/ --model=last
+Check Readme.md file 
 """
 from selenium import webdriver
 import time
@@ -28,7 +17,7 @@ import cv2
 ############################################################
 #  Config Class
 ############################################################
-class Scraper_Config():
+class Scraper_Config:
 
     def __init__(self,
                  SEARCH_QUERY = '',
@@ -88,7 +77,7 @@ class Scraper_Config():
         self.NUMBER_OF_PICTURES =  max(5, NUMBER_OF_PICTURES)
         self.PATH_OF_THIS_FILE = os.path.abspath(os.getcwd())
         self.IMAGE_BASE_DIR = f'{self.PATH_OF_THIS_FILE}/images/{SEARCH_QUERY.replace(" ", "-")}'
-        self.GOOGLE_DRIVER_PATH = '/usr/bin/chromedriver'
+        self.GOOGLE_CHROM_DRIVER_PATH = '/usr/bin/chromedriver'
 
         # Image Resize and Ratio Setup
         self.CHECK_RATIO_AND_RESIZE = CHECK_RATIO_AND_RESIZE
