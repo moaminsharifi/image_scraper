@@ -120,10 +120,10 @@ in this system you can easily define image ratio and which size if ratio with so
 )
 --
 # todo list
-- [] add more example 
-- [] add google search engine
-- [] add more browser driver 
-- [] add batch image downloader
-- [] add image instant augment
-- [] add multi threading support
-- [] add colab support and colab file exmaple
+- [ ] add more example 
+- [ ] add google search engine
+- [ ] add more browser driver 
+- [ ] add batch image downloader
+- [ ] add image instant augment
+- [ ] add multi threading support
+- [ ] add colab support and colab file exmaple
