@@ -13,6 +13,8 @@ import shutil
 import os
 import numpy as np
 import cv2
+from _thread import start_new_thread
+import random
 
 ############################################################
 #  Config Class
@@ -30,7 +32,9 @@ class Scraper_Config:
                  SEARCH_ENGINE_TYPE='duckduckgo',
                  MINIMUM_ELEMENT_ERROR = 0.2,
                  SLEEP_TIME = 0,
-                 SCROLL_PAUSE_TIME = 2):
+                 SCROLL_PAUSE_TIME=2,
+                 USE_MULTI_THREADING = True,
+                 RANDOM_SEED=420):
         """ Create Deffualt Config
         Args:
             SEARCH_QUERY (str, optional): What is for search in browser. Defaults to ''.
@@ -63,7 +67,9 @@ class Scraper_Config:
         assert (type(MAKE_GRAY) == bool, 'MAKE_GRAY must be boolean')
         
         assert (SCROLL_PAUSE_TIME >= 1 , ' scroll time at least must be 2 s')
-
+        assert(type(USE_MULTI_THREADING) == bool,
+               'USE_MULTI_THREADING must be boolean')
+        assert(type(RANDOM_SEED) == int, "RANDOM_SEED must be int")
         # Search Engine Setup
         self.SEARCH_ENGIN_TYPE = SEARCH_ENGINE_TYPE
         self.SEARCH_QUERY = SEARCH_QUERY
@@ -88,8 +94,10 @@ class Scraper_Config:
         self.MAKE_GRAY = MAKE_GRAY
         self.MINIMUM_ELEMENT_ERROR = MINIMUM_ELEMENT_ERROR
         self.MINIMUM_EMELMET = NUMBER_OF_PICTURES + NUMBER_OF_PICTURES * MINIMUM_ELEMENT_ERROR
+        self.USE_MULTI_THREADING = USE_MULTI_THREADING
         # Image Elemnt
         self.HTML_EMELMT_CLASS_NAME = 'tile--img__media'
+        self.RANDOM_SEED = RANDOM_SEED 
        
     def set_SEARCH_QUERY(self):
         self.SEARCH_QUERY  = input('Enter Query to search:  ')
@@ -120,6 +128,7 @@ class Image_Scraper:
         else:
             self.config = custom_config
         attrs = vars(self.config)
+        random.seed(self.config.RANDOM_SEED)
 
         print("############# CONFIGS       ##########")
         print(' '.join("%s: %s \n" % item for item in attrs.items()))
@@ -203,7 +212,25 @@ class Image_Scraper:
         """        
         if self.verbose:
             print(input_string)
+    
+    def download_manager(self, image_url, image_name = ''):
+        """ download manager of image
 
+        Args:
+            image_url (str): image url
+            image_name (str): image name
+        """
+         # download image
+        image = self.download_image(image_url)
+
+        if self.config.CHECK_RATIO_AND_RESIZE:
+            image = self.resize_recolor_reratio(image, image_name)
+
+        
+        # check return image as numpy
+        if type(image).__module__ == np.__name__:
+            self.save_image(image, image_name)
+       
         
     def scrap(self , verbose = True):
         """Main functionality
@@ -225,8 +252,7 @@ class Image_Scraper:
 
         # Check how much Element 
         
-        #while True:
-        #    pass
+       
         
         last_height = self.browser.execute_script("return document.body.scrollHeight")
         
@@ -267,19 +293,19 @@ class Image_Scraper:
             # if SLEEP_TIME greater than 0 then need to sleep some time :)
             if self.config.SLEEP_TIME > 0:
                 time.sleep(self.config.SLEEP_TIME)
+
+
+
             
             try:
-                # download image
-                image = self.download_image(image_url)
-
-
-                if self.config.CHECK_RATIO_AND_RESIZE:
-                    image = self.resize_recolor_reratio(image, image_name)
-                    # check return image as numpy
-                    if type(image).__module__ == np.__name__:
-                        self.save_image(image, image_name)
+                #check if multi threading is enable
+                if self.config.USE_MULTI_THREADING:
+                    time.sleep(random.uniform(0.01, 0.1))
+                    start_new_thread(self.download_manager,
+                                     (image_url, image_name))
                 else:
-                    self.save_image(image, image_name)
+                    self.download_manager(image_url, image_name)
+            
                 self.counter += 1
 
             except Exception:
@@ -290,12 +316,13 @@ class Image_Scraper:
            
             
             if self.counter > self.config.NUMBER_OF_PICTURES:
-                print(
-                    f" process ended and download about {self.config.NUMBER_OF_PICTURES} image")
                 break
+        
+        time.sleep(self.config.SLEEP_TIME + random.uniform(0.1, 0.5))
         # close browser
         self.browser.close()
         print("--- %d seconds ---" % (time.time() - start_time))
+        print(f"--- process ended and download about {self.counter} image ---")
 
             
 ############################################################
