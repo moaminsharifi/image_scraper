@@ -127,5 +127,6 @@ in this system you can easily define image ratio and which size if ratio with so
 - [ ] add more browser driver 
 - [ ] add batch image downloader
 - [ ] add image instant augment
-- [ ] add multi threading support
+- [x] add multi threading support
+- [ ] add just resize without checking ratio
 - [ ] add colab support and colab file exmaple
