@@ -103,6 +103,8 @@ in this system you can easily define image ratio and which size if ratio with so
 | MINIMUM_ELEMENT_ERROR | Float  | if you need 100 image then at least check exist of 120 image this var is gap between 100 to 120. also when check CHECK_RATIO_AND_RESIZE need up to 2 time more elemnt to check and download needed image with custom ratio   | 0.2 |
 | MINIMUM_EMELMET | Int  | calculate number of minimum elemnt must be exist   | as is in default |
 | HTML_EMELMT_CLASS_NAME | String -> html tag  | Html tag in page for check and donwload image  | 10 (seconds) |
+| USE_MULTI_THREADING | Boolean   | Use multi threading or not | True |
+| RANDOM_SEED | Int | What is Your random seed for stop between threads or after done processes  | 420 |
 
 
 ## Why DuckDuckGo?
@@ -120,10 +122,10 @@ in this system you can easily define image ratio and which size if ratio with so
 )
 --
 # todo list
-- add more example 
-- add google search engine
-- add more browser driver 
-- add batch image downloader
-- add image instant augment
-- add multi threading support
-- add colab support and colab file exmaple
+- [ ] add more example 
+- [ ] add google search engine
+- [ ] add more browser driver 
+- [ ] add batch image downloader
+- [ ] add image instant augment
+- [ ] add multi threading support
+- [ ] add colab support and colab file exmaple
